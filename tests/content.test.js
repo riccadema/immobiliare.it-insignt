@@ -456,9 +456,14 @@ test("renderizza popup sicuro, simulatore e chiusura", () => {
   const buttons = findElements(popup, (element) => element.tagName === "BUTTON");
   const inputs = findElements(popup, (element) => element.tagName === "INPUT");
   const summaries = findElements(popup, (element) => element.tagName === "SUMMARY");
+  const featuresDetails = findElement(
+    popup,
+    (element) => element.tagName === "DETAILS" && element.className === "ii-details"
+  );
 
   assert.equal(documentMock.body.children.length, 1);
   assert.equal(featureItems[1].textContent, "<img src=x onerror=alert(1)>");
+  assert.equal(featuresDetails.open, true);
   assert.notEqual(output.textContent, "N/D");
   assert.equal(inputs.length, 4);
   assert.ok(summaries.some((summary) => summary.textContent === "Modifica parametri mutuo"));

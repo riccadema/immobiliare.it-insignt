@@ -45,7 +45,7 @@ Su ogni annuncio compatibile, il content script legge i dati JSON già presenti 
 - box colorati in base al contenuto; campi mancanti evidenziati in rosso;
 - riscaldamento, condizionamento, garage, anno di costruzione e spese condominiali;
 - simulatore mutuo con importo proposta sempre visibile e parametri modificabili in un pannello collapse;
-- elenco delle caratteristiche dell'immobile;
+- elenco delle caratteristiche dell'immobile, aperto di default;
 - pulsante **Apri in Google Maps** e link alla pagina del mercato immobiliare;
 - memoria locale per tema e parametri mutuo personalizzati.
 

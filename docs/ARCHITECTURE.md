@@ -72,7 +72,7 @@ La card **Spese condominiali** usa tono positivo per nessuna spesa o importi fin
 8. `fetchPriceChart(region, city)` scarica prima la pagina mercato e `extractMarketPriceFromHtml()` cerca la media €/m², escludendo il range.
 9. Se pagina mercato è assente o restituisce errore, il price-chart API viene usato come fallback.
 10. Il valore zona, se disponibile, appare accanto a **Prezzo al m²** e determina il colore di confronto.
-11. Gli handler gestiscono tema, minimizzazione, chiusura, drag e ricalcolo della rata proposta.
+11. Gli handler gestiscono tema, minimizzazione, chiusura, drag e ricalcolo della rata proposta; il pannello **Caratteristiche** parte aperto.
 
 ## Contratto dati osservato
 
@@ -127,6 +127,7 @@ I parametri vengono salvati localmente con chiave `immobiliare-insight-mortgage`
 - **Tema**: il toggle nell'header alterna tema chiaro/scuro e aggiorna `localStorage`.
 - **Trascina**: usa Pointer Events sull'header, con limiti viewport e supporto mouse/touch.
 - **Proposta**: `#simulated-price`, percentuale, tasso e durata ascoltano `input`, aggiornano `#rata-mutuo-manuale` e salvano i parametri.
+- **Caratteristiche**: il `<details>` relativo viene renderizzato con `open = true`.
 - **Link**: vengono aperti in nuova scheda con `noopener noreferrer`.
 
 ## Failure mode e limiti

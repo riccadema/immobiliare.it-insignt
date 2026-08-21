@@ -1138,6 +1138,7 @@ function showPopup(viewModel, doc) {
     );
   }
   body.appendChild(features);
+  features.open = true;
 
   if (viewModel.links.length) {
     const linksSection = createElement(doc, "nav", "ii-links");
