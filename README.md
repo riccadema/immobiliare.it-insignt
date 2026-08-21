@@ -22,7 +22,6 @@
    ```bash
    git clone https://github.com/tuo-username/immobiliare-info-viewer.git
 
-
 2. Apri Chrome e vai su `chrome://extensions/`.
 
 3. Attiva la **Modalità sviluppatore** (in alto a destra).
