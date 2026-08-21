@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <img src="showcase.gif" alt="Demo dell'estensione" width="90%" />
+  <img src="showcase.png" alt="Demo dell'estensione" width="90%" />
 </p>
 
 ## Stato del progetto
