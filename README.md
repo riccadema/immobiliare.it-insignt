@@ -20,7 +20,7 @@
 
 1. Clona o scarica questo repository:
    ```bash
-   git clone https://github.com/tuo-username/immobiliare-info-viewer.git
+   git clone https://github.com/riccadema/immobiliare.it-insignt
 
 2. Apri Chrome e vai su `chrome://extensions/`.
 
