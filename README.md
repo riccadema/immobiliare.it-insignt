@@ -37,15 +37,19 @@ Per Chrome, Edge e altri browser Chromium la procedura è equivalente, con nomi 
 
 Su ogni annuncio compatibile, il content script legge i dati JSON già presenti nella pagina e costruisce un popup trascinabile e minimizzabile con:
 
+- tema chiaro/scuro selezionabile dall'header e ricordato localmente;
+- prezzo richiesto in evidenza, prezzo al m² dell'annuncio e disponibilità;
 - data di creazione e aggiornamento, inclusi giorni trascorsi;
-- prezzo, prezzo al m² e confronto con l'ultimo valore del grafico di mercato;
+- confronto tra prezzo al m² dell'annuncio e prezzo medio della zona;
 - locali, superficie, piano e ascensore;
-- classe energetica con indicatore cromatico;
-- disponibilità, riscaldamento, condizionamento, garage, anno di costruzione e spese condominiali;
-- stima della rata mensile usando mutuo al 95%, tasso annuo del 4% e durata di 30 anni;
+- box colorati in base al contenuto; campi mancanti evidenziati in rosso;
+- riscaldamento, condizionamento, garage, anno di costruzione e spese condominiali;
+- simulatore mutuo con importo proposta sempre visibile e parametri modificabili in un pannello collapse;
 - elenco delle caratteristiche dell'immobile;
-- link a Google Maps e alla pagina del mercato immobiliare della città;
-- simulazione di una proposta: modificando **Importo Proposta** viene ricalcolata la rata.
+- pulsante **Apri in Google Maps** e link alla pagina del mercato immobiliare;
+- memoria locale per tema e parametri mutuo personalizzati.
+
+Il prezzo medio della zona viene cercato prima nella pagina **Mercato immobiliare**, ignorando i valori minimo/massimo del range, e poi nel price-chart API. Il riquadro del prezzo medio apre direttamente la pagina mercato. Se il sito presenta una verifica anti-bot o cambia struttura, il campo resta visibile come non disponibile e viene evidenziato in rosso.
 
 ## Ambito di esecuzione e dati
 
@@ -58,9 +62,10 @@ https://www.immobiliare.it/annunci/*
 L'estensione:
 
 - non contiene popup di Chrome, options page o service worker;
-- non usa un backend proprietario, database o storage persistente;
+- non usa un backend proprietario o database;
+- usa `localStorage` solo per tema e parametri mutuo dell'utente;
 - legge `#__NEXT_DATA__` dalla pagina dell'annuncio;
-- interroga l'endpoint di mercato di Immobiliare.it per l'ultimo dato del grafico;
+- interroga prima la pagina mercato per la media e usa l'endpoint chart solo come fallback;
 - apre collegamenti esterni a Google Maps quando l'utente li seleziona.
 
 I dettagli tecnici e il flusso completo sono in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
@@ -73,6 +78,10 @@ immobiliare.it-insignt/
 ├── content.js                     # Estrazione dati, API e UI
 ├── style.css                      # Stili del popup iniettato
 ├── showcase.gif                   # Demo visiva
+├── package.json                   # Script check/test senza dipendenze runtime
+├── tests/
+│   ├── content.test.js            # Test unitari Node
+│   └── market-page.fixture.html   # Fixture per scraping prezzo zona
 ├── README.md                      # Uso e installazione
 ├── AGENTS.md                      # Regole per agenti e manutentori
 ├── CONTRIBUTING.md                # Workflow di modifica e verifica
@@ -86,7 +95,14 @@ Il nome della cartella contiene intenzionalmente `insignt`, come nel repository 
 
 ## Sviluppo e verifica
 
-Non esiste una pipeline automatica configurata. Dopo una modifica:
+Gli script locali non richiedono dipendenze esterne:
+
+```bash
+npm run check
+npm test
+```
+
+Dopo una modifica:
 
 1. ricarica l'estensione da `chrome://extensions/`;
 2. apri un annuncio compatibile;
@@ -98,8 +114,7 @@ Per convenzioni e vincoli, consulta [AGENTS.md](AGENTS.md) e [CONTRIBUTING.md](C
 ## Limiti noti
 
 - Il codice dipende dalla struttura interna di `#__NEXT_DATA__` e dai nomi dei campi di Immobiliare.it.
-- La risposta del price chart proviene da un endpoint interno al sito e può cambiare senza preavviso.
-- Il rendering viene completato nel callback della richiesta del price chart: se la richiesta restituisce dati assenti o fallisce, il popup può non apparire.
+- Il confronto zona dipende da struttura della pagina interna e endpoint non versionati, che possono cambiare senza preavviso; il popup base resta comunque disponibile.
 - Il confronto del prezzo usa valori grezzi; formato e unità dipendono dai dati ricevuti.
 - L'origine del percorso Google Maps è vuota (`origin=`), quindi Google Maps decide l'origine.
 - Il mutuo è una stima indicativa e non rappresenta un'offerta finanziaria.

@@ -9,6 +9,7 @@
 - Leggi `manifest.json`, `content.js`, `style.css` e `docs/ARCHITECTURE.md`.
 - Tratta `#__NEXT_DATA__` e `props.pageProps.detailData.realEstate` come contratto esterno instabile.
 - Cerca prima funzioni esistenti di formattazione, URL e calcolo rata.
+- Preserva memoria locale di tema e parametri mutuo; non cambiare chiavi storage senza migrazione.
 
 ## Vincoli
 
@@ -22,4 +23,4 @@
 
 ## Documentazione e verifica
 
-Aggiorna `README.md`, `AGENTS.md` o `docs/ARCHITECTURE.md` quando la modifica cambia comportamento o contratto. Non esiste una suite automatica: valida il manifest, ricarica l'estensione e prova annunci con dati completi e incompleti.
+Aggiorna `README.md`, `AGENTS.md` o `docs/ARCHITECTURE.md` quando la modifica cambia comportamento o contratto. Esegui `npm run check` e `npm test`, poi valida il manifest, ricarica l'estensione e prova annunci con dati completi e incompleti.

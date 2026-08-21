@@ -1,14 +1,14 @@
 {
   "manifest_version": 3,
-  "name": "Immobiliare.it Info Viewer",
-  "version": "1.0",
-  "description": "Mostra i dati principali di un annuncio immobiliare in un popup.",
-  "permissions": ["scripting"],
+  "name": "Immobiliare.it Insight",
+  "version": "1.1.0",
+  "description": "Arricchisce gli annunci Immobiliare.it con dati, stime e collegamenti utili.",
   "content_scripts": [
     {
       "matches": ["https://www.immobiliare.it/annunci/*"],
       "js": ["content.js"],
-      "css": ["style.css"]
+      "css": ["style.css"],
+      "run_at": "document_idle"
     }
   ]
 }

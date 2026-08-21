@@ -1,0 +1,13 @@
+{
+  "name": "immobiliare.it-insignt",
+  "version": "1.1.0",
+  "private": true,
+  "description": "Chrome extension that enriches Immobiliare.it listings.",
+  "scripts": {
+    "check": "node --check content.js",
+    "test": "node --test tests/content.test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
